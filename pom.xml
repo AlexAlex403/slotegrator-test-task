@@ -20,13 +20,17 @@
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
         <allure-maven-plugin.version>2.10.0</allure-maven-plugin.version>
 
-        <testng.version>6.14.3</testng.version>
+        <testng.version>7.0.0</testng.version>
         <aspectj.version>1.9.4</aspectj.version>
         <allure.version>2.13.6</allure.version>
         <log4j-slf4j>2.17.1</log4j-slf4j>
         <rest-assured>4.4.0</rest-assured>
         <lombok>1.18.12</lombok>
         <jackson-databind>2.9.7</jackson-databind>
+
+        <cucumber>5.7.0</cucumber>
+        <selenium>3.141.59</selenium>
+        <webdriver-manager>5.0.3</webdriver-manager>
     </properties>
 
     <build>
@@ -48,7 +52,7 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
-                        <include>**/*Test.java</include>
+                        <include>**/*Test*.java</include>
                     </includes>
                     <argLine>
                         -Xmx1024m
@@ -57,6 +61,10 @@
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/reports/allure-results</allure.results.directory>
                     </systemPropertyVariables>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng-api.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/testng-ui.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -81,7 +89,7 @@
                         <id>allure-maven-plugin-start</id>
                         <phase>test</phase>
                         <goals>
-                            <goal>report</goal>
+                            <goal>serve</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -136,6 +144,33 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-databind}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber5-jvm</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdriver-manager}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -29,7 +29,10 @@ public class ApiTest {
         };
     }
 
-    @Test(description = "Регистрация нового игрока и получение профиля", dataProvider = "newPlayerOptionalFieldsDataProvider")
+    @Test(description = "Регистрация нового игрока и получение профиля",
+            dataProvider = "newPlayerOptionalFieldsDataProvider",
+            groups = {"api"}
+    )
     public void registerNewPlayer(String name, String surname, String currencyCode) {
         //1. Получить токен гостя (Client Credentials Grant, scope — guest:default)
         CredentialsGrantResponseData guestCredentials = Request.getGuestToken();
