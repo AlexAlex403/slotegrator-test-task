@@ -12,6 +12,10 @@ public class DriverManager {
     private DriverManager() {
     }
 
+    public static boolean isDriverNull() {
+        return driver == null;
+    }
+
     public static WebDriver getDriver() {
         if (driver == null) {
             String browser = PropertyManager.getProperty(PropertyKey.BROWSER, "chrome");
